@@ -1,0 +1,13 @@
+{
+  "updatedAt": "2026-06-18T07:59:38.192Z",
+  "languages": [
+    "en",
+    "es",
+    "pt",
+    "fr",
+    "de",
+    "ja",
+    "zh"
+  ],
+  "strategy": "Prefer local holiday names from Nager.Date; localize UI, dates and summaries during static build."
+}

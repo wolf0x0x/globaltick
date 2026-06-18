@@ -1,0 +1,58 @@
+{
+  "date": "2026-06-18",
+  "languages": [
+    "en",
+    "ja",
+    "zh"
+  ],
+  "animals": {
+    "rat": {
+      "rating": 3,
+      "text": "rat timing favors clear boundaries and one well-chosen action."
+    },
+    "ox": {
+      "rating": 4,
+      "text": "ox timing favors clear boundaries and one well-chosen action."
+    },
+    "tiger": {
+      "rating": 5,
+      "text": "tiger timing favors clear boundaries and one well-chosen action."
+    },
+    "rabbit": {
+      "rating": 3,
+      "text": "rabbit timing favors clear boundaries and one well-chosen action."
+    },
+    "dragon": {
+      "rating": 4,
+      "text": "dragon timing favors clear boundaries and one well-chosen action."
+    },
+    "snake": {
+      "rating": 5,
+      "text": "snake timing favors clear boundaries and one well-chosen action."
+    },
+    "horse": {
+      "rating": 3,
+      "text": "horse timing favors clear boundaries and one well-chosen action."
+    },
+    "goat": {
+      "rating": 4,
+      "text": "goat timing favors clear boundaries and one well-chosen action."
+    },
+    "monkey": {
+      "rating": 5,
+      "text": "monkey timing favors clear boundaries and one well-chosen action."
+    },
+    "rooster": {
+      "rating": 3,
+      "text": "rooster timing favors clear boundaries and one well-chosen action."
+    },
+    "dog": {
+      "rating": 4,
+      "text": "dog timing favors clear boundaries and one well-chosen action."
+    },
+    "pig": {
+      "rating": 5,
+      "text": "pig timing favors clear boundaries and one well-chosen action."
+    }
+  }
+}

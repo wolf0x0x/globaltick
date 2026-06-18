@@ -1,4 +1,5 @@
 import { mkdir, rm, writeFile, cp } from "node:fs/promises";
+import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 
 const root = process.cwd();
@@ -27,7 +28,7 @@ const copy = {
     countriesTitle: "Country Holidays Explorer", marketingTitle: "2026 Global Marketing Calendar", countdownTitle: "Major Event Countdown Center",
     sportsTitle: "2026 Global Sports Events Calendar", moviesTitle: "2026 Global Movie Release Calendar", techTitle: "2026 Technology Events Calendar",
     historyTitle: "Today in History", horoscopeTitle: "Daily Horoscope Calendar", compareTitle: "Global Holiday Comparison", aboutTitle: "About GlobalTick", privacyTitle: "Newsletter & Privacy",
-    newsletterText: "Weekly planning notes for global holidays, retail dates, sports, entertainment and tech events. The form stores your address locally until you connect an email provider.",
+    newsletterText: "Weekly planning notes for global holidays, retail dates, sports, entertainment and tech events. The static form validates email, stores your preference locally and opens a subscription email request.",
     sourceText: "Public holiday data is seeded from Nager.Date-style fields and enriched with OpenHolidays, Wikidata and curated public event references."
   },
   es: {
@@ -93,7 +94,7 @@ const copy = {
     countriesTitle: "国家/地区节日浏览", marketingTitle: "2026 全球营销日历", countdownTitle: "重大事件倒计时中心",
     sportsTitle: "2026 全球体育赛事日历", moviesTitle: "2026 全球电影上映日历", techTitle: "2026 科技发布会日历",
     historyTitle: "历史上的今天", horoscopeTitle: "每日星座运势", compareTitle: "全球重大节日对比", aboutTitle: "关于 GlobalTick", privacyTitle: "订阅与隐私",
-    newsletterText: "订阅全球节假日、零售节点、体育娱乐和科技发布的每周规划简报。表单会先在本地保存邮箱，便于后续接入邮件服务。",
+    newsletterText: "订阅全球节假日、零售节点、体育娱乐和科技发布的每周规划简报。静态表单会校验邮箱、本地保存偏好，并打开订阅邮件请求。",
     sourceText: "数据基于 Nager.Date 风格公共假日字段，并结合 OpenHolidays、Wikidata 与公开事件日历整理。"
   }
 };
@@ -117,7 +118,50 @@ const countries = [
   { code: "CA", flag: "🇨🇦", name: "Canada", continent: "Americas", holidays: 10, next: "Canada Day", date: "2026-07-01" },
   { code: "AU", flag: "🇦🇺", name: "Australia", continent: "Oceania", holidays: 10, next: "King's Birthday", date: "2026-06-08" },
   { code: "MX", flag: "🇲🇽", name: "Mexico", continent: "Americas", holidays: 8, next: "Independence Day", date: "2026-09-16" },
-  { code: "ZA", flag: "🇿🇦", name: "South Africa", continent: "Africa", holidays: 12, next: "Heritage Day", date: "2026-09-24" }
+  { code: "ZA", flag: "🇿🇦", name: "South Africa", continent: "Africa", holidays: 12, next: "Heritage Day", date: "2026-09-24" },
+  { code: "KR", flag: "🇰🇷", name: "South Korea", continent: "Asia", holidays: 15, next: "Chuseok", date: "2026-09-25" },
+  { code: "IT", flag: "🇮🇹", name: "Italy", continent: "Europe", holidays: 12, next: "Republic Day", date: "2026-06-02" },
+  { code: "ES", flag: "🇪🇸", name: "Spain", continent: "Europe", holidays: 14, next: "National Day", date: "2026-10-12" },
+  { code: "NL", flag: "🇳🇱", name: "Netherlands", continent: "Europe", holidays: 9, next: "King's Day", date: "2026-04-27" },
+  { code: "SE", flag: "🇸🇪", name: "Sweden", continent: "Europe", holidays: 13, next: "National Day", date: "2026-06-06" },
+  { code: "CH", flag: "🇨🇭", name: "Switzerland", continent: "Europe", holidays: 10, next: "Swiss National Day", date: "2026-08-01" },
+  { code: "TR", flag: "🇹🇷", name: "Turkey", continent: "Asia", holidays: 14, next: "Republic Day", date: "2026-10-29" },
+  { code: "SA", flag: "🇸🇦", name: "Saudi Arabia", continent: "Asia", holidays: 9, next: "Saudi National Day", date: "2026-09-23" },
+  { code: "AE", flag: "🇦🇪", name: "United Arab Emirates", continent: "Asia", holidays: 10, next: "UAE National Day", date: "2026-12-02" },
+  { code: "SG", flag: "🇸🇬", name: "Singapore", continent: "Asia", holidays: 11, next: "National Day", date: "2026-08-09" },
+  { code: "MY", flag: "🇲🇾", name: "Malaysia", continent: "Asia", holidays: 16, next: "Malaysia Day", date: "2026-09-16" },
+  { code: "TH", flag: "🇹🇭", name: "Thailand", continent: "Asia", holidays: 17, next: "King's Birthday", date: "2026-07-28" },
+  { code: "VN", flag: "🇻🇳", name: "Vietnam", continent: "Asia", holidays: 11, next: "National Day", date: "2026-09-02" },
+  { code: "PH", flag: "🇵🇭", name: "Philippines", continent: "Asia", holidays: 18, next: "Independence Day", date: "2026-06-12" },
+  { code: "ID", flag: "🇮🇩", name: "Indonesia", continent: "Asia", holidays: 16, next: "Independence Day", date: "2026-08-17" },
+  { code: "NZ", flag: "🇳🇿", name: "New Zealand", continent: "Oceania", holidays: 12, next: "Matariki", date: "2026-07-10" },
+  { code: "AR", flag: "🇦🇷", name: "Argentina", continent: "Americas", holidays: 16, next: "Independence Day", date: "2026-07-09" },
+  { code: "CL", flag: "🇨🇱", name: "Chile", continent: "Americas", holidays: 15, next: "Independence Day", date: "2026-09-18" },
+  { code: "CO", flag: "🇨🇴", name: "Colombia", continent: "Americas", holidays: 18, next: "Independence Day", date: "2026-07-20" },
+  { code: "PE", flag: "🇵🇪", name: "Peru", continent: "Americas", holidays: 14, next: "Independence Day", date: "2026-07-28" },
+  { code: "EG", flag: "🇪🇬", name: "Egypt", continent: "Africa", holidays: 14, next: "Revolution Day", date: "2026-07-23" },
+  { code: "NG", flag: "🇳🇬", name: "Nigeria", continent: "Africa", holidays: 12, next: "Independence Day", date: "2026-10-01" },
+  { code: "KE", flag: "🇰🇪", name: "Kenya", continent: "Africa", holidays: 13, next: "Madaraka Day", date: "2026-06-01" },
+  { code: "MA", flag: "🇲🇦", name: "Morocco", continent: "Africa", holidays: 13, next: "Throne Day", date: "2026-07-30" },
+  { code: "PL", flag: "🇵🇱", name: "Poland", continent: "Europe", holidays: 13, next: "Constitution Day", date: "2026-05-03" },
+  { code: "BE", flag: "🇧🇪", name: "Belgium", continent: "Europe", holidays: 10, next: "National Day", date: "2026-07-21" },
+  { code: "AT", flag: "🇦🇹", name: "Austria", continent: "Europe", holidays: 13, next: "National Day", date: "2026-10-26" },
+  { code: "PT", flag: "🇵🇹", name: "Portugal", continent: "Europe", holidays: 13, next: "Portugal Day", date: "2026-06-10" },
+  { code: "DK", flag: "🇩🇰", name: "Denmark", continent: "Europe", holidays: 11, next: "Constitution Day", date: "2026-06-05" },
+  { code: "FI", flag: "🇫🇮", name: "Finland", continent: "Europe", holidays: 13, next: "Independence Day", date: "2026-12-06" },
+  { code: "NO", flag: "🇳🇴", name: "Norway", continent: "Europe", holidays: 12, next: "Constitution Day", date: "2026-05-17" },
+  { code: "IE", flag: "🇮🇪", name: "Ireland", continent: "Europe", holidays: 10, next: "St. Patrick's Day", date: "2026-03-17" },
+  { code: "IL", flag: "🇮🇱", name: "Israel", continent: "Asia", holidays: 11, next: "Rosh Hashanah", date: "2026-09-12" },
+  { code: "PK", flag: "🇵🇰", name: "Pakistan", continent: "Asia", holidays: 14, next: "Independence Day", date: "2026-08-14" },
+  { code: "BD", flag: "🇧🇩", name: "Bangladesh", continent: "Asia", holidays: 18, next: "Victory Day", date: "2026-12-16" },
+  { code: "CZ", flag: "🇨🇿", name: "Czechia", continent: "Europe", holidays: 13, next: "Czech Statehood Day", date: "2026-09-28" },
+  { code: "GR", flag: "🇬🇷", name: "Greece", continent: "Europe", holidays: 12, next: "Ohi Day", date: "2026-10-28" },
+  { code: "UA", flag: "🇺🇦", name: "Ukraine", continent: "Europe", holidays: 11, next: "Independence Day", date: "2026-08-24" },
+  { code: "RO", flag: "🇷🇴", name: "Romania", continent: "Europe", holidays: 15, next: "Great Union Day", date: "2026-12-01" },
+  { code: "HU", flag: "🇭🇺", name: "Hungary", continent: "Europe", holidays: 11, next: "St. Stephen's Day", date: "2026-08-20" },
+  { code: "RU", flag: "🇷🇺", name: "Russia", continent: "Europe", holidays: 14, next: "Russia Day", date: "2026-06-12" },
+  { code: "HK", flag: "🇭🇰", name: "Hong Kong", continent: "Asia", holidays: 17, next: "HKSAR Establishment Day", date: "2026-07-01" },
+  { code: "TW", flag: "🇹🇼", name: "Taiwan", continent: "Asia", holidays: 14, next: "Double Ten Day", date: "2026-10-10" }
 ];
 
 const holidays = [
@@ -182,11 +226,14 @@ const tech = [
   ["Gamescom 2026", "2026-08-26", "Cologne", "Games, hardware, creators and entertainment technology"],
   ["Apple September Event", "2026-09-08", "Cupertino / online", "Expected iPhone, Watch and ecosystem launches"]
 ];
-const movies = [
-  ["Toy Story 5", "2026-06-19", "Animation", "Disney / Pixar"], ["The Odyssey", "2026-07-17", "Epic", "Universal"],
-  ["Moana Live Action", "2026-07-10", "Adventure", "Disney"], ["Jumanji 4", "2026-12-11", "Adventure comedy", "Sony"],
-  ["Untitled Star Wars Film", "2026-05-22", "Sci-fi", "Lucasfilm"], ["Supergirl", "2026-06-26", "Superhero", "Warner Bros."]
-];
+const movies = loadMovies([
+  { title: "Toy Story 5", date: "2026-06-19", genre: "Animation", studio: "Disney / Pixar", overview: "Pixar's toy-box franchise returns for a summer family release window.", poster: "" },
+  { title: "The Odyssey", date: "2026-07-17", genre: "Epic", studio: "Universal", overview: "A mythology-driven theatrical tentpole positioned for global summer audiences.", poster: "" },
+  { title: "Moana Live Action", date: "2026-07-10", genre: "Adventure", studio: "Disney", overview: "Disney's live-action island adventure supports family, music and travel content campaigns.", poster: "" },
+  { title: "Jumanji 4", date: "2026-12-11", genre: "Adventure comedy", studio: "Sony", overview: "A holiday-season adventure comedy release with broad international audience potential.", poster: "" },
+  { title: "Untitled Star Wars Film", date: "2026-05-22", genre: "Sci-fi", studio: "Lucasfilm", overview: "A franchise release window with strong fan, merchandise and entertainment news demand.", poster: "" },
+  { title: "Supergirl", date: "2026-06-26", genre: "Superhero", studio: "Warner Bros.", overview: "A DC superhero release planned for late June with comic, cosplay and pop culture hooks.", poster: "" }
+]);
 const history = [
   ["1815", "Battle of Waterloo", "Napoleon was defeated near Waterloo, reshaping European politics."],
   ["1873", "Susan B. Anthony trial", "The activist was fined for voting, energizing the US suffrage movement."],
@@ -211,9 +258,40 @@ const zodiac = [
   ["Aquarius", "♒", "Groups and tools are active. A collaborative system improves if you remove one confusing rule or add one shared reference."],
   ["Pisces", "♓", "Creative focus is available, especially around music, images or memory. Give the idea a container before it dissolves."]
 ];
+const chineseZodiac = [
+  ["Rat", "鼠", "Quick judgment helps today. Confirm numbers, reply early and avoid turning a useful shortcut into a rushed promise."],
+  ["Ox", "牛", "Steady progress wins. A patient budget, repair or documentation task becomes easier once you name the next small step."],
+  ["Tiger", "虎", "Lead with courage, then leave space for feedback. A bold message lands better when it includes one practical detail."],
+  ["Rabbit", "兔", "Soft power is strong. Choose the calm route, refine the atmosphere and let a well-timed courtesy open the door."],
+  ["Dragon", "龙", "Ambition is active. Put your largest idea into a schedule so momentum turns into something visible."],
+  ["Snake", "蛇", "Observation beats noise. Read the room, keep one card private and make the decision after a second look."],
+  ["Horse", "马", "Movement clears the mind. Travel, errands or a brisk reset help you separate real urgency from restlessness."],
+  ["Goat", "羊", "Creative cooperation is favored. Improve the shared mood, then ask for the concrete support you need."],
+  ["Monkey", "猴", "Experimentation pays off. Test a tool, script or pitch, but save a clean version before you improvise."],
+  ["Rooster", "鸡", "Details matter. Presentation, timing and wording can upgrade the result more than extra effort."],
+  ["Dog", "狗", "Loyalty and boundaries both count. Keep your promise, but do not inherit a problem that needs a new owner."],
+  ["Pig", "猪", "Goodwill expands when you simplify. Share resources, choose comfort wisely and finish with generosity."]
+];
 
 function e(slug, name, date, type, countries, icon, summary, i18n = {}) {
   return { slug, name, date, type, countries, icon, summary, i18n };
+}
+function loadMovies(seed) {
+  const file = path.join(root, "data/movies/2026.json");
+  if (!existsSync(file)) return seed;
+  try {
+    const parsed = JSON.parse(readFileSync(file, "utf8"));
+    return Array.isArray(parsed.movies) && parsed.movies.length ? parsed.movies.map(item => ({
+      title: item.title,
+      date: item.date || item.release_date || "2026-01-01",
+      genre: item.genre || "Film",
+      studio: item.studio || item.source || "TMDB",
+      overview: item.overview || "Upcoming 2026 movie release.",
+      poster: item.poster || ""
+    })) : seed;
+  } catch {
+    return seed;
+  }
 }
 function c(lang) { return copy[lang] || copy.en; }
 function local(item, lang, field = "name") {
@@ -237,7 +315,7 @@ function assetPrefix(lang, route) {
 function allEvents() {
   const fromSports = sports.map(s => ({ slug: slugify(s[0]), name: s[0], date: s[1], endDate: s[2], type: "Sports", countries: s[3], icon: "🏆", summary: s[4] }));
   const fromTech = tech.map(t => ({ slug: slugify(t[0]), name: t[0], date: t[1], type: "Tech", countries: t[2], icon: "⌘", summary: t[3] }));
-  const fromMovies = movies.map(m => ({ slug: slugify(m[0]), name: m[0], date: m[1], type: "Entertainment", countries: m[3], icon: "🎬", summary: `${m[2]} release from ${m[3]}.` }));
+  const fromMovies = movies.map(m => ({ slug: slugify(m.title), name: m.title, date: m.date, type: "Entertainment", countries: m.studio, icon: "🎬", summary: m.overview || `${m.genre} release from ${m.studio}.` }));
   const seen = new Set();
   return [...holidays, ...fromSports, ...fromTech, ...fromMovies]
     .filter(item => {
@@ -277,13 +355,17 @@ function layout({ lang, route, active, title, description, body, jsonLd = [] }) 
 <head>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-7D6SE08345"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-7D6SE08345');</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8695398658548679" crossorigin="anonymous"></script>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${title}</title><meta name="description" content="${description}"><meta name="robots" content="index,follow,max-image-preview:large"><meta name="geo.region" content="001"><meta name="geo.placename" content="Global">
 <link rel="canonical" href="${canonical(lang, route)}">${alternates}
 <meta property="og:site_name" content="GlobalTick"><meta property="og:title" content="${title}"><meta property="og:description" content="${description}"><meta property="og:type" content="website"><meta property="og:url" content="${canonical(lang, route)}"><meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="${assets}assets/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="${assets}assets/apple-touch-icon.svg"><link rel="stylesheet" href="${assets}assets/main.css">
 ${data.map(item => `<script type="application/ld+json">${JSON.stringify(item)}</script>`).join("\n")}
-</head><body>${nav(lang, active, route)}<main>${body}</main>${footer(lang)}<script src="${assets}assets/app.js"></script></body></html>`;
+</head><body>${nav(lang, active, route)}<main>${body}${adSlot()}</main>${footer(lang)}<script src="${assets}assets/app.js"></script></body></html>`;
+}
+function adSlot() {
+  return `<section class="ad-slot" aria-label="Advertisement"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8695398658548679" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins></section>`;
 }
 function footer(lang) {
   return `<footer><div><strong>GlobalTick</strong><p>${c(lang).sourceText}</p></div><div class="footer-links"><a href="${hrefFor(lang, "about.html")}">About</a><a href="${hrefFor(lang, "privacy.html")}">Privacy</a><a href="/sitemap.xml">Sitemap</a><a href="https://github.com/wolf0x0x/globaltick">GitHub</a></div><p class="fine">© 2026 GlobalTick · Nager.Date · OpenHolidays · Wikidata · public event calendars</p></footer>`;
@@ -353,8 +435,8 @@ function sportsPage(lang) {
   <section class="list">${sports.map(s => `<article><time>${fmt(s[1], lang)}</time><div><h3>🏆 ${s[0]}</h3><p>${fmt(s[1], lang)} - ${fmt(s[2], lang)} · ${s[3]}</p><span class="pill sports">${s[4]}</span></div></article>`).join("")}</section>`;
 }
 function moviesPage(lang) {
-  return `${hero(c(lang).moviesTitle, "Curated 2026 releases with studio, genre and campaign timing. TMDB enrichment can be added when a private API key is available.", lang)}
-  <section class="movie-grid">${movies.map((m, i) => `<article class="card poster"><div class="poster-art p${i % 5}">${m[0].split(" ").map(w => w[0]).join("")}</div><h3>${m[0]}</h3><p>${fmt(m[1], lang)}</p><span class="pill entertainment">${m[2]}</span><small>${m[3]}</small></article>`).join("")}</section>`;
+  return `${hero(c(lang).moviesTitle, "Curated 2026 releases with studio, genre, overview, poster-ready fields and TMDB sync support.", lang)}
+  <section class="movie-grid">${movies.map((m, i) => `<article class="card poster">${m.poster ? `<img class="poster-img" src="${m.poster}" alt="${m.title} poster">` : `<div class="poster-art p${i % 5}">${m.title.split(" ").map(w => w[0]).join("")}</div>`}<h3>${m.title}</h3><p>${fmt(m.date, lang)}</p><span class="pill entertainment">${m.genre}</span><small>${m.studio}</small><p>${m.overview}</p></article>`).join("")}</section>`;
 }
 function techPage(lang) {
   return `${hero(c(lang).techTitle, "Developer conferences, hardware launches and platform events in one planning view.", lang)}
@@ -366,7 +448,8 @@ function historyPage(lang) {
 }
 function horoscopePage(lang) {
   return `${hero(c(lang).horoscopeTitle, "Daily differentiated zodiac notes for content discovery and light planning.", lang)}
-  <section class="zodiac">${zodiac.map((z, i) => `<article class="card"><span class="icon">${z[1]}</span><h3>${z[0]}</h3><p>${z[2]}</p><b>${"★".repeat(3 + (i % 3))}</b></article>`).join("")}</section>`;
+  <section><h2>Western Zodiac</h2><div class="zodiac">${zodiac.map((z, i) => `<article class="card"><span class="icon">${z[1]}</span><h3>${z[0]}</h3><p>${z[2]}</p><b>${"★".repeat(3 + (i % 3))}</b></article>`).join("")}</div></section>
+  <section><h2>${lang === "zh" ? "生肖运势" : "Chinese Zodiac"}</h2><div class="zodiac">${chineseZodiac.map((z, i) => `<article class="card"><span class="icon">${z[1]}</span><h3>${z[0]}</h3><p>${z[2]}</p><b>${"★".repeat(3 + (i % 3))}</b></article>`).join("")}</div></section>`;
 }
 function comparePage(lang) {
   const chosen = ["spring-festival-2026", "diwali-2026", "thanksgiving-2026", "christmas-2026"].map(slug => holidays.find(h => h.slug === slug));
@@ -403,7 +486,7 @@ function countryPage(lang, cn) {
 
 const renderers = { home, calendar: calendarPage, countries: countriesPage, marketing: marketingPage, countdowns: countdownPage, sports: sportsPage, movies: moviesPage, tech: techPage, history: historyPage, horoscope: horoscopePage, compare: comparePage, about: aboutPage, privacy: privacyPage };
 
-const css = `:root{--bg:#f7f9fb;--surface:#fff;--navy:#1e3a5f;--ink:#191c1e;--muted:#5d6673;--line:#e0e7ef;--orange:#ff6b35;--mint:#4ecdc4;--green:#10b981;--red:#ef4444;--blue:#0ea5e9;--purple:#8b5cf6;--teal:#0f766e;--amber:#f59e0b}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,"PingFang SC","Noto Sans CJK SC",sans-serif;line-height:1.55}a{color:inherit;text-decoration:none}.topbar{position:sticky;top:0;z-index:10;min-height:64px;background:rgba(255,255,255,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;padding:0 clamp(16px,4vw,48px)}.brand{display:flex;align-items:center;gap:8px;color:var(--navy);font-size:20px}.nav{display:flex;gap:4px;overflow:auto;flex:1}.nav a{font-size:14px;color:var(--muted);padding:9px 10px;border-radius:8px;white-space:nowrap}.nav a.active,.nav a:hover{background:#eaf1fb;color:var(--navy)}.nav-search{position:relative;max-width:260px}.nav-search input,.lang{border:1px solid var(--line);border-radius:8px;background:#fff;padding:8px}.menu{display:none}main{max-width:1280px;margin:auto;padding:28px clamp(16px,4vw,48px) 56px}.hero{min-height:370px;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(260px,.65fr);gap:28px;align-items:center;padding:28px 0 18px}.eyebrow{color:var(--orange);font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:.08em}.hero h1{font-size:clamp(34px,5vw,60px);line-height:1.03;margin:8px 0 18px;color:var(--navy);letter-spacing:0}.hero p{font-size:18px;color:var(--muted);max-width:760px}.hero-panel{min-height:250px;border-radius:8px;background:radial-gradient(circle at 20% 20%,#4ecdc4,transparent 28%),linear-gradient(135deg,#1e3a5f,#00413d);color:#fff;padding:28px;display:flex;flex-direction:column;justify-content:end;box-shadow:0 18px 40px rgba(30,58,95,.18);overflow:hidden}.hero-panel b{font-size:104px;line-height:1}.search{position:relative;margin-top:24px;max-width:720px;background:#fff;border:1px solid var(--line);border-radius:999px;display:flex;align-items:center;gap:10px;padding:12px 18px;box-shadow:0 2px 8px rgba(30,58,95,.08)}.search input{border:0;outline:0;font-size:16px;flex:1}.suggestions{position:absolute;top:44px;left:0;right:0;background:#fff;border:1px solid var(--line);border-radius:8px;box-shadow:0 10px 28px rgba(30,58,95,.14);display:none;overflow:hidden}.search .suggestions{top:56px;left:20px;right:20px}.suggestions a{display:block;padding:10px 14px;border-bottom:1px solid var(--line)}section{margin:34px 0}h2{font-size:24px;color:var(--navy);margin:0 0 16px}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px;box-shadow:0 2px 8px rgba(30,58,95,.08)}.card:hover{box-shadow:0 8px 24px rgba(30,58,95,.12);transform:translateY(-2px);transition:.2s}.card h3{margin:8px 0;color:var(--navy)}.card p{color:var(--muted)}.icon,.flag{font-size:34px}.text-link{color:var(--orange);font-weight:700}.today,.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.today article,.stats article{background:#fff;border:1px solid var(--line);border-radius:8px;padding:16px}.today b,.stats b{display:block;color:var(--navy);font-size:20px}.toolbar{display:flex;gap:12px;flex-wrap:wrap}.toolbar input,.toolbar select,.newsletter input{border:1px solid var(--line);border-radius:8px;background:#fff;padding:11px 12px;min-width:220px}.months{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.months.one{grid-template-columns:minmax(320px,540px)}.month{background:#fff;border:1px solid var(--line);border-radius:8px;padding:16px}.month h3{margin:0 0 12px;color:var(--navy)}.week,.days{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}.week{font-size:12px;color:var(--muted);margin-bottom:8px}.days a,.days span{min-height:38px;display:grid;place-items:center;border-radius:8px;position:relative}.days a:hover{background:#edf6ff}.days a.has-event{font-weight:800;color:var(--navy);background:#f8fafc}.days a i{position:absolute;bottom:3px;display:flex;gap:2px}.days a em{width:6px;height:6px;border-radius:50%;display:block}.month-events{list-style:none;padding:10px 0 0;margin:8px 0 0;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}.month-events li{margin:5px 0}.legend{display:flex;gap:16px;flex-wrap:wrap}.dot,.days em{background:var(--orange)}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px}.public,.days em.public{background:var(--navy)}.religious,.days em.religious{background:var(--purple)}.cultural,.days em.cultural{background:var(--orange)}.marketing,.days em.marketing{background:var(--red)}.sports,.days em.sports{background:var(--green)}.tech,.days em.tech{background:var(--blue)}.nature,.days em.nature{background:var(--teal)}.entertainment,.days em.entertainment{background:var(--amber)}.country-grid,.movie-grid,.zodiac,.lang-grid,.compare{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.list{display:grid;gap:12px}.list article{display:grid;grid-template-columns:120px 1fr auto;gap:16px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:8px;padding:14px}.list time{font-weight:700;color:var(--navy)}.list h3{margin:0}.list p{margin:4px 0;color:var(--muted)}.pill{display:inline-block;border-radius:999px;background:#eef2ff;color:var(--navy);padding:4px 9px;font-size:12px;font-weight:700;margin-right:6px}.pill.public,.pill.religious,.pill.marketing,.pill.sports,.pill.tech,.pill.nature{color:#fff}.pill.cultural,.pill.entertainment{color:#1f2937}.muted{color:var(--muted);font-size:13px}.timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.timeline article,.history article{background:#fff;border-left:4px solid var(--orange);border-radius:8px;padding:16px;box-shadow:0 2px 8px rgba(30,58,95,.08)}.countdowns .timer{display:grid;grid-template-columns:auto auto auto auto;gap:6px;align-items:end}.timer b{font-size:32px;color:var(--navy)}.status{color:var(--orange)}.is-ended{opacity:.72}button{border:0;background:var(--navy);color:#fff;border-radius:8px;padding:10px 14px;font-weight:700;cursor:pointer}.featured .grid{grid-template-columns:1fr}.poster-art{height:230px;border-radius:8px;background:linear-gradient(135deg,#1e3a5f,#ff6b35);display:grid;place-items:center;color:#fff;font-size:38px;font-weight:800}.p1{background:linear-gradient(135deg,#002927,#4ecdc4)}.p2{background:linear-gradient(135deg,#8b5cf6,#0ea5e9)}.p3{background:linear-gradient(135deg,#ab3500,#ffb59d)}.p4{background:linear-gradient(135deg,#111827,#10b981)}.history{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.info-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.bar{height:96px;position:relative;background:#fff;border:1px solid var(--line);border-radius:8px}.bar span{position:absolute;top:34px;font-size:26px}.map-band{background:#fff;border:1px solid var(--line);border-radius:8px;padding:22px}.world-map{font-size:32px;color:var(--mint);letter-spacing:8px}.newsletter form{display:flex;gap:10px;flex-wrap:wrap}.newsletter input{flex:1}output{display:block;color:var(--green);font-weight:700}footer{border-top:1px solid var(--line);padding:28px clamp(16px,4vw,48px);background:#fff;color:var(--muted)}footer strong{color:var(--navy)}.footer-links{display:flex;gap:14px;flex-wrap:wrap;margin:12px 0}.fine{font-size:12px}.lang-grid a{display:block}@media(max-width:1050px){.nav-search{display:none}}@media(max-width:900px){.hero{grid-template-columns:1fr}.hero-panel{min-height:180px}.nav{display:none}.menu{display:block;margin-left:auto;border:1px solid var(--line);background:#fff;color:var(--navy)}.nav.open{display:flex;position:absolute;top:64px;left:0;right:0;background:#fff;border-bottom:1px solid var(--line);padding:12px;flex-direction:column}.grid,.country-grid,.movie-grid,.zodiac,.lang-grid,.compare,.months,.timeline,.history,.info-grid{grid-template-columns:1fr 1fr}.today,.stats{grid-template-columns:1fr 1fr}.list article{grid-template-columns:1fr}.hero h1{font-size:38px}}@media(max-width:560px){main{padding-top:16px}.grid,.country-grid,.movie-grid,.zodiac,.lang-grid,.compare,.months,.timeline,.history,.info-grid,.today,.stats{grid-template-columns:1fr}.topbar{gap:8px}.brand strong{font-size:18px}.lang{max-width:88px}.hero{min-height:auto}.hero-panel b{font-size:68px}.search{border-radius:8px}.list article{padding:12px}.poster-art{height:180px}}`;
+const css = `:root{--bg:#f7f9fb;--surface:#fff;--navy:#1e3a5f;--ink:#191c1e;--muted:#5d6673;--line:#e0e7ef;--orange:#ff6b35;--mint:#4ecdc4;--green:#10b981;--red:#ef4444;--blue:#0ea5e9;--purple:#8b5cf6;--teal:#0f766e;--amber:#f59e0b}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,"PingFang SC","Noto Sans CJK SC",sans-serif;line-height:1.55;overflow-x:hidden}a{color:inherit;text-decoration:none}.topbar{position:sticky;top:0;z-index:10;min-height:64px;background:rgba(255,255,255,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;padding:0 clamp(16px,4vw,48px)}.brand{display:flex;align-items:center;gap:8px;color:var(--navy);font-size:20px}.nav{display:flex;gap:4px;overflow:auto;flex:1}.nav a{font-size:14px;color:var(--muted);padding:9px 10px;border-radius:8px;white-space:nowrap}.nav a.active,.nav a:hover{background:#eaf1fb;color:var(--navy)}.nav-search{position:relative;max-width:260px}.nav-search input,.lang{border:1px solid var(--line);border-radius:8px;background:#fff;padding:8px}.menu{display:none}main{max-width:1280px;margin:auto;padding:28px clamp(16px,4vw,48px) 56px}.hero{min-height:370px;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(260px,.65fr);gap:28px;align-items:center;padding:28px 0 18px}.eyebrow{color:var(--orange);font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:.08em}.hero h1{font-size:clamp(34px,5vw,60px);line-height:1.03;margin:8px 0 18px;color:var(--navy);letter-spacing:0}.hero p{font-size:18px;color:var(--muted);max-width:760px}.hero-panel{min-height:250px;border-radius:8px;background:radial-gradient(circle at 20% 20%,#4ecdc4,transparent 28%),linear-gradient(135deg,#1e3a5f,#00413d);color:#fff;padding:28px;display:flex;flex-direction:column;justify-content:end;box-shadow:0 18px 40px rgba(30,58,95,.18);overflow:hidden}.hero-panel b{font-size:104px;line-height:1}.search{position:relative;margin-top:24px;max-width:720px;background:#fff;border:1px solid var(--line);border-radius:999px;display:flex;align-items:center;gap:10px;padding:12px 18px;box-shadow:0 2px 8px rgba(30,58,95,.08)}.search input{border:0;outline:0;font-size:16px;flex:1;min-width:0}.suggestions{position:absolute;top:44px;left:0;right:0;background:#fff;border:1px solid var(--line);border-radius:8px;box-shadow:0 10px 28px rgba(30,58,95,.14);display:none;overflow:hidden;z-index:20}.search .suggestions{top:56px;left:20px;right:20px}.suggestions a{display:block;padding:10px 14px;border-bottom:1px solid var(--line)}section{margin:34px 0}h2{font-size:24px;color:var(--navy);margin:0 0 16px}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px;box-shadow:0 2px 8px rgba(30,58,95,.08)}.card:hover{box-shadow:0 8px 24px rgba(30,58,95,.12);transform:translateY(-2px);transition:.2s}.card h3{margin:8px 0;color:var(--navy)}.card p{color:var(--muted)}.icon,.flag{font-size:34px}.text-link{color:var(--orange);font-weight:700}.today,.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.today article,.stats article{background:#fff;border:1px solid var(--line);border-radius:8px;padding:16px}.today b,.stats b{display:block;color:var(--navy);font-size:20px}.toolbar{display:flex;gap:12px;flex-wrap:wrap}.toolbar input,.toolbar select,.newsletter input{border:1px solid var(--line);border-radius:8px;background:#fff;padding:11px 12px;min-width:220px}.months{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.months.one{grid-template-columns:minmax(320px,540px)}.month{background:#fff;border:1px solid var(--line);border-radius:8px;padding:16px}.month h3{margin:0 0 12px;color:var(--navy)}.week,.days{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}.week{font-size:12px;color:var(--muted);margin-bottom:8px}.days a,.days span{min-height:38px;display:grid;place-items:center;border-radius:8px;position:relative}.days a:hover{background:#edf6ff}.days a.has-event{font-weight:800;color:var(--navy);background:#f8fafc}.days a i{position:absolute;bottom:3px;display:flex;gap:2px}.days a em{width:6px;height:6px;border-radius:50%;display:block}.month-events{list-style:none;padding:10px 0 0;margin:8px 0 0;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}.month-events li{margin:5px 0}.legend{display:flex;gap:16px;flex-wrap:wrap}.dot,.days em{background:var(--orange)}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px}.public,.days em.public{background:var(--navy)}.religious,.days em.religious{background:var(--purple)}.cultural,.days em.cultural{background:var(--orange)}.marketing,.days em.marketing{background:var(--red)}.sports,.days em.sports{background:var(--green)}.tech,.days em.tech{background:var(--blue)}.nature,.days em.nature{background:var(--teal)}.entertainment,.days em.entertainment{background:var(--amber)}.country-grid,.movie-grid,.zodiac,.lang-grid,.compare{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.list{display:grid;gap:12px}.list article{display:grid;grid-template-columns:120px 1fr auto;gap:16px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:8px;padding:14px}.list time{font-weight:700;color:var(--navy)}.list h3{margin:0}.list p{margin:4px 0;color:var(--muted)}.pill{display:inline-block;border-radius:999px;background:#eef2ff;color:var(--navy);padding:4px 9px;font-size:12px;font-weight:700;margin-right:6px}.pill.public,.pill.religious,.pill.marketing,.pill.sports,.pill.tech,.pill.nature{color:#fff}.pill.cultural,.pill.entertainment{color:#1f2937}.muted{color:var(--muted);font-size:13px}.timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.timeline article,.history article{background:#fff;border-left:4px solid var(--orange);border-radius:8px;padding:16px;box-shadow:0 2px 8px rgba(30,58,95,.08)}.countdowns .timer{display:grid;grid-template-columns:auto auto auto auto;gap:6px;align-items:end}.timer b{font-size:32px;color:var(--navy)}.status{color:var(--orange)}.is-ended{opacity:.72}button{border:0;background:var(--navy);color:#fff;border-radius:8px;padding:10px 14px;font-weight:700;cursor:pointer;min-height:40px}.featured .grid{grid-template-columns:1fr}.poster-art,.poster-img{width:100%;height:230px;border-radius:8px;object-fit:cover}.poster-art{background:linear-gradient(135deg,#1e3a5f,#ff6b35);display:grid;place-items:center;color:#fff;font-size:38px;font-weight:800}.p1{background:linear-gradient(135deg,#002927,#4ecdc4)}.p2{background:linear-gradient(135deg,#8b5cf6,#0ea5e9)}.p3{background:linear-gradient(135deg,#ab3500,#ffb59d)}.p4{background:linear-gradient(135deg,#111827,#10b981)}.history{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.info-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.bar{height:96px;position:relative;background:#fff;border:1px solid var(--line);border-radius:8px}.bar span{position:absolute;top:34px;font-size:26px}.map-band{background:#fff;border:1px solid var(--line);border-radius:8px;padding:22px}.world-map{font-size:32px;color:var(--mint);letter-spacing:8px}.newsletter form{display:flex;gap:10px;flex-wrap:wrap}.newsletter input{flex:1}output{display:block;color:var(--green);font-weight:700}.ad-slot{min-height:96px;border:1px dashed var(--line);border-radius:8px;background:#fff;display:grid;place-items:center;padding:12px;color:var(--muted)}footer{border-top:1px solid var(--line);padding:28px clamp(16px,4vw,48px);background:#fff;color:var(--muted)}footer strong{color:var(--navy)}.footer-links{display:flex;gap:14px;flex-wrap:wrap;margin:12px 0}.fine{font-size:12px}.lang-grid a{display:block}@media(max-width:1050px){.nav-search{display:none}}@media(max-width:900px){.hero{grid-template-columns:1fr}.hero-panel{min-height:180px}.nav{display:none}.menu{display:block;margin-left:auto;border:1px solid var(--line);background:#fff;color:var(--navy)}.nav.open{display:flex;position:absolute;top:64px;left:0;right:0;background:#fff;border-bottom:1px solid var(--line);padding:12px;flex-direction:column}.grid,.country-grid,.movie-grid,.zodiac,.lang-grid,.compare,.months,.timeline,.history,.info-grid{grid-template-columns:1fr 1fr}.today,.stats{grid-template-columns:1fr 1fr}.list article{grid-template-columns:1fr}.hero h1{font-size:38px}}@media(max-width:560px){main{padding:16px 12px}.grid,.country-grid,.movie-grid,.zodiac,.lang-grid,.compare,.months,.timeline,.history,.info-grid,.today,.stats{grid-template-columns:1fr!important}.topbar{padding:0 12px;min-height:56px;gap:8px}.nav-search{display:none}.brand strong{font-size:18px}.lang{max-width:88px}.hero{min-height:auto;padding-top:12px}.hero h1{font-size:34px}.hero p{font-size:16px}.hero-panel{min-height:150px;padding:18px}.hero-panel b{font-size:68px}.search{border-radius:8px;padding:10px 12px}.search .suggestions{left:0;right:0}.toolbar input,.toolbar select,.newsletter input{min-width:100%;width:100%}.month{padding:8px}.months.one{grid-template-columns:1fr}.days a,.days span{min-height:32px;font-size:12px}.list article{padding:12px}.poster-art,.poster-img{height:180px}.world-map{font-size:22px;letter-spacing:3px}}`;
 
 const searchData = () => JSON.stringify(allEvents().map(h => ({ name: h.name, url: `/holiday/${h.slug}.html`, text: h.summary })).concat(countries.map(c => ({ name: `${c.name} ${c.code}`, url: `/${c.code}.html`, text: c.next }))).concat(countdowns.map(c => ({ name: c.name, url: "/countdowns.html", text: c.place }))));
 const appJs = `const data=${searchData()};
@@ -411,10 +494,10 @@ const lang=new URLSearchParams(location.search).get('lang');if(lang&&['es','pt',
 document.querySelector('.menu')?.addEventListener('click',()=>document.querySelector('.nav')?.classList.toggle('open'));
 document.querySelector('.lang')?.addEventListener('change',e=>{location.href=e.target.value});
 function tick(){document.querySelectorAll('[data-countdown]').forEach(el=>{const start=el.dataset.start?new Date(el.dataset.start+'T00:00:00Z'):null;const end=new Date(el.dataset.countdown+'T00:00:00Z');const now=new Date();const t=end-now;const live=start&&now>=start&&now<=end;const ended=t<0;if(live){el.classList.add('is-live')}if(ended){el.classList.add('is-ended')}const d=Math.max(0,Math.floor(t/864e5));const h=Math.max(0,Math.floor(t%864e5/36e5));el.querySelector('[data-days]').textContent=d;el.querySelector('[data-hours]').textContent=h})}tick();setInterval(tick,60000);
-document.querySelectorAll('[data-ics]').forEach(btn=>btn.addEventListener('click',()=>{const [name,date,place]=btn.dataset.ics.split('|');const dt=date.replaceAll('-','');const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//GlobalTick//EN','BEGIN:VEVENT','UID:'+dt+'-'+name.replace(/\\s+/g,'-')+'@globaltick.xyz','DTSTAMP:'+dt+'T000000Z','DTSTART;VALUE=DATE:'+dt,'SUMMARY:'+name,'LOCATION:'+place,'END:VEVENT','END:VCALENDAR'].join('\\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([ics],{type:'text/calendar'}));a.download=name.toLowerCase().replace(/[^a-z0-9]+/g,'-')+'.ics';a.click();URL.revokeObjectURL(a.href)}));
+document.querySelectorAll('[data-ics]').forEach(btn=>btn.addEventListener('click',()=>{const [name,date,place]=btn.dataset.ics.split('|');const dt=date.replaceAll('-','');const end=new Date(date+'T00:00:00Z');end.setUTCDate(end.getUTCDate()+1);const dtEnd=end.toISOString().slice(0,10).replaceAll('-','');const slug=name.toLowerCase().replace(/[^a-z0-9]+/g,'-');const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//GlobalTick//EN','CALSCALE:GREGORIAN','METHOD:PUBLISH','BEGIN:VEVENT','UID:'+dt+'-'+slug+'@globaltick.xyz','DTSTAMP:'+dt+'T000000Z','DTSTART;VALUE=DATE:'+dt,'DTEND;VALUE=DATE:'+dtEnd,'SUMMARY:'+name,'LOCATION:'+place,'DESCRIPTION:GlobalTick calendar export for '+name+' in '+place,'END:VEVENT','END:VCALENDAR'].join('\\r\\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([ics],{type:'text/calendar;charset=utf-8'}));a.download=slug+'.ics';a.click();URL.revokeObjectURL(a.href)}));
 function wireSearch(sel){document.querySelectorAll(sel).forEach(input=>{const box=input.parentElement.querySelector('[data-suggestions]');input.addEventListener('input',()=>{const q=input.value.toLowerCase().trim();if(!q){box.style.display='none';box.innerHTML='';return}box.innerHTML=data.filter(x=>(x.name+' '+x.text).toLowerCase().includes(q)).slice(0,8).map(x=>'<a href=\"'+x.url+'\"><b>'+x.name+'</b><br><small>'+x.text+'</small></a>').join('');box.style.display=box.innerHTML?'block':'none'})})}wireSearch('[data-search]');wireSearch('[data-search-small]');
 document.querySelector('[data-country-filter]')?.addEventListener('input',e=>{const q=e.target.value.toLowerCase();document.querySelectorAll('[data-country]').forEach(card=>card.style.display=card.dataset.country.toLowerCase().includes(q)?'':'none')});
-document.querySelector('[data-newsletter]')?.addEventListener('submit',e=>{e.preventDefault();const email=e.currentTarget.querySelector('input').value;localStorage.setItem('globaltick-newsletter-email',email);e.currentTarget.querySelector('output').textContent='Subscribed locally: '+email});`;
+document.querySelector('[data-newsletter]')?.addEventListener('submit',e=>{e.preventDefault();const email=e.currentTarget.querySelector('input').value.trim();if(!email)return;localStorage.setItem('globaltick-newsletter-email',email);e.currentTarget.querySelector('output').textContent='Subscription request prepared: '+email;const subject=encodeURIComponent('GlobalTick newsletter subscription');const body=encodeURIComponent('Please subscribe '+email+' to GlobalTick planning notes.');setTimeout(()=>{location.href='mailto:hello@globaltick.xyz?subject='+subject+'&body='+body},250)});`;
 
 const faviconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><rect width="128" height="128" rx="28" fill="#1e3a5f"/><circle cx="64" cy="64" r="43" fill="none" stroke="#4ecdc4" stroke-width="8"/><path d="M21 64h86M64 21c16 15 24 29 24 43s-8 28-24 43M64 21C48 36 40 50 40 64s8 28 24 43" fill="none" stroke="#4ecdc4" stroke-width="6" stroke-linecap="round"/><text x="64" y="80" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="58" font-weight="800" fill="#fff">G</text></svg>`;
 
@@ -426,6 +509,16 @@ async function write(route, html) {
 async function page(lang, route, active, title, desc, body, jsonLd) {
   await write(languages[lang].dir ? `${languages[lang].dir}/${route || "index.html"}` : route || "index.html", layout({ lang, route, active, title, description: desc, body, jsonLd }));
 }
+function routeFromCanonical(url) {
+  const pathname = new URL(url).pathname.replace(/^\/+/, "");
+  const parts = pathname.split("/").filter(Boolean);
+  if (parts.length && languages[parts[0]]) parts.shift();
+  const route = parts.join("/");
+  return route === "" || route === "index.html" ? "" : route;
+}
+function sitemapAlternates(route) {
+  return Object.keys(languages).map(code => `    <xhtml:link rel="alternate" hreflang="${code}" href="${canonical(code, route)}"/>`).join("\n") + `\n    <xhtml:link rel="alternate" hreflang="x-default" href="${canonical("en", route)}"/>`;
+}
 async function main() {
   await rm(dist, { recursive: true, force: true });
   await mkdir(path.join(dist, "assets"), { recursive: true });
@@ -433,6 +526,9 @@ async function main() {
   await writeFile(path.join(dist, "assets/app.js"), appJs);
   await writeFile(path.join(dist, "assets/favicon.svg"), faviconSvg);
   await writeFile(path.join(dist, "assets/apple-touch-icon.svg"), faviconSvg);
+  if (existsSync(path.join(root, "data"))) {
+    await cp(path.join(root, "data"), path.join(dist, "data"), { recursive: true });
+  }
   await writeFile(path.join(dist, "ads.txt"), adsText);
   await writeFile(path.join(dist, "CNAME"), "globaltick.xyz\n");
   await writeFile(path.join(root, "ads.txt"), adsText);
@@ -450,7 +546,7 @@ async function main() {
     }
     for (const h of holidays) {
       const route = `holiday/${h.slug}.html`;
-      await page(lang, route, "countries", `${local(h, lang)} 2026 Date, Countries & Countdown | GlobalTick`, `${local(h, lang)} 2026 date, related countries, cultural context, countdown and calendar export.`, holidayPage(lang, h), { "@context": "https://schema.org", "@type": "Event", name: `${local(h, lang)} 2026`, startDate: h.date, eventAttendanceMode: "https://schema.org/MixedEventAttendanceMode", eventStatus: "https://schema.org/EventScheduled", location: { "@type": "Place", name: h.countries }, description: local(h, lang, "summary"), url: canonical(lang, route) });
+      await page(lang, route, "countries", `${local(h, lang)} 2026 Date, Countries & Countdown | GlobalTick`, `${local(h, lang)} 2026 date, related countries, cultural context, countdown and calendar export.`, holidayPage(lang, h), { "@context": "https://schema.org", "@type": "Event", name: `${local(h, lang)} 2026`, startDate: h.date, endDate: h.date, eventAttendanceMode: "https://schema.org/MixedEventAttendanceMode", eventStatus: "https://schema.org/EventScheduled", additionalType: "PublicHoliday", eventType: h.type, isAccessibleForFree: true, keywords: [`${h.name} 2026`, h.type, "global holidays", "calendar export"], image: `${site}/assets/favicon.svg`, organizer: { "@type": "Organization", name: "GlobalTick", url: site }, location: { "@type": "Place", name: h.countries }, description: local(h, lang, "summary"), url: canonical(lang, route) });
       urls.push(canonical(lang, route));
     }
     for (const cn of countries) {
@@ -462,7 +558,10 @@ async function main() {
       urls.push(canonical(lang, legacy));
     }
   }
-  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(u => `  <url><loc>${u}</loc><lastmod>${buildDate}</lastmod><changefreq>weekly</changefreq><priority>${u.endsWith("/") ? "1.0" : "0.7"}</priority></url>`).join("\n")}\n</urlset>\n`;
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urls.map(u => {
+    const route = routeFromCanonical(u);
+    return `  <url><loc>${u}</loc>\n${sitemapAlternates(route)}\n    <lastmod>${buildDate}</lastmod><changefreq>weekly</changefreq><priority>${route === "" ? "1.0" : "0.7"}</priority></url>`;
+  }).join("\n")}\n</urlset>\n`;
   await writeFile(path.join(dist, "sitemap.xml"), sitemap);
   await writeFile(path.join(dist, "robots.txt"), `User-agent: *\nAllow: /\nSitemap: ${site}/sitemap.xml\n`);
   await cp(path.join(dist, "sitemap.xml"), path.join(root, "sitemap.xml"));

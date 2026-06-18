@@ -1,0 +1,8 @@
+{
+  "updatedAt": "2026-06-18T07:59:44.864Z",
+  "outputs": [
+    "dist/sitemap.xml",
+    "dist/**/*.html JSON-LD",
+    "hreflang alternates"
+  ]
+}

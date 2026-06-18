@@ -1,0 +1,54 @@
+{
+  "date": "06-18",
+  "languages": [
+    "en",
+    "es",
+    "pt",
+    "fr",
+    "de",
+    "ja",
+    "zh"
+  ],
+  "events": [
+    {
+      "year": 1815,
+      "title": "Battle of Waterloo",
+      "description": "A decisive battle reshaped European politics."
+    },
+    {
+      "year": 1873,
+      "title": "Susan B. Anthony trial",
+      "description": "The suffrage movement gained a lasting legal symbol."
+    },
+    {
+      "year": 1940,
+      "title": "Appeal of 18 June",
+      "description": "Charles de Gaulle called for French resistance from London."
+    },
+    {
+      "year": 1953,
+      "title": "Egypt becomes a republic",
+      "description": "Egypt formally ended the monarchy."
+    },
+    {
+      "year": 1979,
+      "title": "SALT II signed",
+      "description": "The US and Soviet Union signed an arms limitation treaty."
+    },
+    {
+      "year": 1983,
+      "title": "Sally Ride in space",
+      "description": "Sally Ride became the first American woman in space."
+    },
+    {
+      "year": 2006,
+      "title": "KazSat-1 launched",
+      "description": "Kazakhstan launched its first communications satellite."
+    },
+    {
+      "year": 2018,
+      "title": "DNSSEC rollover preparation",
+      "description": "Internet operators prepared for a major trust-anchor transition."
+    }
+  ]
+}

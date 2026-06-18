@@ -1,0 +1,54 @@
+{
+  "source": "curated-seed",
+  "updatedAt": "2026-06-18T07:58:50.121Z",
+  "movies": [
+    {
+      "title": "Toy Story 5",
+      "date": "2026-06-19",
+      "genre": "Animation",
+      "studio": "Disney / Pixar",
+      "overview": "Pixar's toy-box franchise returns for a summer family release window.",
+      "poster": ""
+    },
+    {
+      "title": "The Odyssey",
+      "date": "2026-07-17",
+      "genre": "Epic",
+      "studio": "Universal",
+      "overview": "A mythology-driven theatrical tentpole positioned for global summer audiences.",
+      "poster": ""
+    },
+    {
+      "title": "Moana Live Action",
+      "date": "2026-07-10",
+      "genre": "Adventure",
+      "studio": "Disney",
+      "overview": "Disney's live-action island adventure supports family, music and travel content campaigns.",
+      "poster": ""
+    },
+    {
+      "title": "Jumanji 4",
+      "date": "2026-12-11",
+      "genre": "Adventure comedy",
+      "studio": "Sony",
+      "overview": "A holiday-season adventure comedy release with broad international audience potential.",
+      "poster": ""
+    },
+    {
+      "title": "Untitled Star Wars Film",
+      "date": "2026-05-22",
+      "genre": "Sci-fi",
+      "studio": "Lucasfilm",
+      "overview": "A franchise release window with strong fan, merchandise and entertainment news demand.",
+      "poster": ""
+    },
+    {
+      "title": "Supergirl",
+      "date": "2026-06-26",
+      "genre": "Superhero",
+      "studio": "Warner Bros.",
+      "overview": "A DC superhero release planned for late June with comic, cosplay and pop culture hooks.",
+      "poster": ""
+    }
+  ]
+}

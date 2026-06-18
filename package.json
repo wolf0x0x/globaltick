@@ -5,7 +5,20 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/build.mjs",
-    "serve": "python3 -m http.server 4173 -d dist"
+    "serve": "python3 -m http.server 4173 -d dist",
+    "scheduled": "node scripts/run_scheduled_task.mjs",
+    "sync:holidays": "node scripts/tasks.mjs sync_global_holidays",
+    "sync:movies": "node scripts/tasks.mjs sync_movies_tmdb",
+    "sync:sports": "node scripts/tasks.mjs sync_sports_events",
+    "sync:tech": "node scripts/tasks.mjs sync_tech_events",
+    "gen:horoscope": "node scripts/tasks.mjs gen_daily_horoscope",
+    "gen:history": "node scripts/tasks.mjs gen_today_in_history",
+    "gen:zodiac": "node scripts/tasks.mjs gen_daily_chinese_zodiac",
+    "sync:i18n": "node scripts/tasks.mjs sync_i18n_content",
+    "gen:holiday-pages": "node scripts/tasks.mjs gen_multilang_holiday_pages",
+    "gen:seo": "node scripts/tasks.mjs gen_sitemap_and_schema",
+    "expand:countries": "node scripts/tasks.mjs expand_country_pages",
+    "sync:marketing": "node scripts/tasks.mjs sync_marketing_calendar"
   },
   "devDependencies": {}
 }

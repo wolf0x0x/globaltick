@@ -1,0 +1,49 @@
+name: Scheduled data maintenance
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 3 * * *"
+    - cron: "0 4 * * 1"
+    - cron: "0 5 * * 3"
+    - cron: "0 6 1 * *"
+    - cron: "0 5 * * *"
+    - cron: "30 5 * * *"
+    - cron: "15 5 * * *"
+    - cron: "0 6 * * *"
+    - cron: "0 7 * * 0"
+    - cron: "0 8 * * 0"
+    - cron: "0 9 * * 6"
+    - cron: "0 10 15 * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: scheduled-data-${{ github.event.schedule || github.run_id }}
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    env:
+      SCHEDULE: ${{ github.event.schedule }}
+      TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm run scheduled -- "$SCHEDULE"
+      - run: npm run build
+      - name: Commit generated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ -n "$(git status --porcelain)" ]; then
+            git add data dist sitemap.xml robots.txt ads.txt CNAME
+            git commit -m "[auto] data maintenance ${GITHUB_RUN_ID}"
+            git push
+          else
+            echo "No generated changes"
+          fi
