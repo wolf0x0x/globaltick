@@ -1,0 +1,308 @@
+[
+  {
+    "date": "2026-01-01",
+    "localName": "Neujahr",
+    "name": "New Year's Day",
+    "countryCode": "DE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Neujahr"
+  },
+  {
+    "date": "2026-01-06",
+    "localName": "Heilige Drei Könige",
+    "name": "Epiphany",
+    "countryCode": "DE",
+    "fixed": false,
+    "global": false,
+    "counties": [
+      "DE-BW",
+      "DE-BY",
+      "DE-ST"
+    ],
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Heilige Drei Könige"
+  },
+  {
+    "date": "2026-03-08",
+    "localName": "Internationaler Frauentag",
+    "name": "International Women's Day",
+    "countryCode": "DE",
+    "fixed": false,
+    "global": false,
+    "counties": [
+      "DE-BE",
+      "DE-MV"
+    ],
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Internationaler Frauentag"
+  },
+  {
+    "date": "2026-04-03",
+    "localName": "Karfreitag",
+    "name": "Good Friday",
+    "countryCode": "DE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Karfreitag"
+  },
+  {
+    "date": "2026-04-05",
+    "localName": "Ostersonntag",
+    "name": "Easter Sunday",
+    "countryCode": "DE",
+    "fixed": false,
+    "global": false,
+    "counties": [
+      "DE-BB"
+    ],
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Ostersonntag"
+  },
+  {
+    "date": "2026-04-06",
+    "localName": "Ostermontag",
+    "name": "Easter Monday",
+    "countryCode": "DE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Ostermontag"
+  },
+  {
+    "date": "2026-05-01",
+    "localName": "Tag der Arbeit",
+    "name": "Labour Day",
+    "countryCode": "DE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Tag der Arbeit"
+  },
+  {
+    "date": "2026-05-14",
+    "localName": "Christi Himmelfahrt",
+    "name": "Ascension Day",
+    "countryCode": "DE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Christi Himmelfahrt"
+  },
+  {
+    "date": "2026-05-24",
+    "localName": "Pfingstsonntag",
+    "name": "Pentecost",
+    "countryCode": "DE",
+    "fixed": false,
+    "global": false,
+    "counties": [
+      "DE-BB"
+    ],
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Pfingstsonntag"
+  },
+  {
+    "date": "2026-05-25",
+    "localName": "Pfingstmontag",
+    "name": "Whit Monday",
+    "countryCode": "DE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Pfingstmontag"
+  },
+  {
+    "date": "2026-06-04",
+    "localName": "Fronleichnam",
+    "name": "Corpus Christi",
+    "countryCode": "DE",
+    "fixed": false,
+    "global": false,
+    "counties": [
+      "DE-BW",
+      "DE-BY",
+      "DE-HE",
+      "DE-NW",
+      "DE-RP",
+      "DE-SL"
+    ],
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Fronleichnam"
+  },
+  {
+    "date": "2026-08-15",
+    "localName": "Mariä Himmelfahrt",
+    "name": "Assumption Day",
+    "countryCode": "DE",
+    "fixed": false,
+    "global": false,
+    "counties": [
+      "DE-SL"
+    ],
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Mariä Himmelfahrt"
+  },
+  {
+    "date": "2026-09-20",
+    "localName": "Weltkindertag",
+    "name": "World Children's Day",
+    "countryCode": "DE",
+    "fixed": false,
+    "global": false,
+    "counties": [
+      "DE-TH"
+    ],
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Weltkindertag"
+  },
+  {
+    "date": "2026-10-03",
+    "localName": "Tag der Deutschen Einheit",
+    "name": "German Unity Day",
+    "countryCode": "DE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Tag der Deutschen Einheit"
+  },
+  {
+    "date": "2026-10-31",
+    "localName": "Reformationstag",
+    "name": "Reformation Day",
+    "countryCode": "DE",
+    "fixed": false,
+    "global": false,
+    "counties": [
+      "DE-BB",
+      "DE-MV",
+      "DE-SN",
+      "DE-ST",
+      "DE-TH",
+      "DE-HB",
+      "DE-HH",
+      "DE-NI",
+      "DE-SH"
+    ],
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Reformationstag"
+  },
+  {
+    "date": "2026-11-01",
+    "localName": "Allerheiligen",
+    "name": "All Saints' Day",
+    "countryCode": "DE",
+    "fixed": false,
+    "global": false,
+    "counties": [
+      "DE-BW",
+      "DE-BY",
+      "DE-NW",
+      "DE-RP",
+      "DE-SL"
+    ],
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Allerheiligen"
+  },
+  {
+    "date": "2026-11-18",
+    "localName": "Buß- und Bettag",
+    "name": "Repentance and Prayer Day",
+    "countryCode": "DE",
+    "fixed": false,
+    "global": false,
+    "counties": [
+      "DE-SN"
+    ],
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Buß- und Bettag"
+  },
+  {
+    "date": "2026-12-25",
+    "localName": "Erster Weihnachtstag",
+    "name": "Christmas Day",
+    "countryCode": "DE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Erster Weihnachtstag"
+  },
+  {
+    "date": "2026-12-26",
+    "localName": "Zweiter Weihnachtstag",
+    "name": "St. Stephen's Day",
+    "countryCode": "DE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Zweiter Weihnachtstag"
+  }
+]

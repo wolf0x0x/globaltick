@@ -1,0 +1,170 @@
+[
+  {
+    "date": "2026-01-01",
+    "localName": "Første nyttårsdag",
+    "name": "New Year's Day",
+    "countryCode": "NO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Første nyttårsdag"
+  },
+  {
+    "date": "2026-04-02",
+    "localName": "Skjærtorsdag",
+    "name": "Maundy Thursday",
+    "countryCode": "NO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Skjærtorsdag"
+  },
+  {
+    "date": "2026-04-03",
+    "localName": "Langfredag",
+    "name": "Good Friday",
+    "countryCode": "NO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Langfredag"
+  },
+  {
+    "date": "2026-04-05",
+    "localName": "Første påskedag",
+    "name": "Easter Sunday",
+    "countryCode": "NO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Første påskedag"
+  },
+  {
+    "date": "2026-04-06",
+    "localName": "Andre påskedag",
+    "name": "Easter Monday",
+    "countryCode": "NO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Andre påskedag"
+  },
+  {
+    "date": "2026-05-01",
+    "localName": "Første mai",
+    "name": "Labour Day",
+    "countryCode": "NO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Første mai"
+  },
+  {
+    "date": "2026-05-14",
+    "localName": "Kristi himmelfartsdag",
+    "name": "Ascension Day",
+    "countryCode": "NO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Kristi himmelfartsdag"
+  },
+  {
+    "date": "2026-05-17",
+    "localName": "Syttende mai",
+    "name": "Constitution Day",
+    "countryCode": "NO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Syttende mai"
+  },
+  {
+    "date": "2026-05-24",
+    "localName": "Første pinsedag",
+    "name": "Pentecost",
+    "countryCode": "NO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Første pinsedag"
+  },
+  {
+    "date": "2026-05-25",
+    "localName": "Andre pinsedag",
+    "name": "Whit Monday",
+    "countryCode": "NO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Andre pinsedag"
+  },
+  {
+    "date": "2026-12-25",
+    "localName": "Første juledag",
+    "name": "Christmas Day",
+    "countryCode": "NO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Første juledag"
+  },
+  {
+    "date": "2026-12-26",
+    "localName": "Andre juledag",
+    "name": "St. Stephen's Day",
+    "countryCode": "NO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Andre juledag"
+  }
+]

@@ -1,0 +1,198 @@
+[
+  {
+    "date": "2026-01-01",
+    "localName": "Año Nuevo",
+    "name": "New Year's Day",
+    "countryCode": "PE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Año Nuevo"
+  },
+  {
+    "date": "2026-04-02",
+    "localName": "Jueves Santo",
+    "name": "Holy Thursday",
+    "countryCode": "PE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Jueves Santo"
+  },
+  {
+    "date": "2026-04-02",
+    "localName": "Jueves Santo",
+    "name": "Maundy Thursday",
+    "countryCode": "PE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Jueves Santo"
+  },
+  {
+    "date": "2026-04-03",
+    "localName": "Viernes Santo",
+    "name": "Good Friday",
+    "countryCode": "PE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Viernes Santo"
+  },
+  {
+    "date": "2026-04-05",
+    "localName": "Domingo Santo",
+    "name": "Easter Sunday",
+    "countryCode": "PE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Domingo Santo"
+  },
+  {
+    "date": "2026-05-01",
+    "localName": "Día del Trabajo",
+    "name": "International Workers' Day",
+    "countryCode": "PE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Día del Trabajo"
+  },
+  {
+    "date": "2026-06-29",
+    "localName": "Día de San Pedro y San Pablo",
+    "name": "Saint Peter and Saint Paul",
+    "countryCode": "PE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Día de San Pedro y San Pablo"
+  },
+  {
+    "date": "2026-07-28",
+    "localName": "Día de la Independencia",
+    "name": "Independence Day",
+    "countryCode": "PE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Día de la Independencia"
+  },
+  {
+    "date": "2026-07-29",
+    "localName": "Día de la Independencia",
+    "name": "Independence Day",
+    "countryCode": "PE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Día de la Independencia"
+  },
+  {
+    "date": "2026-08-30",
+    "localName": "Día de Santa Rosa de Lima",
+    "name": "Santa Rosa de Lima",
+    "countryCode": "PE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Día de Santa Rosa de Lima"
+  },
+  {
+    "date": "2026-10-08",
+    "localName": "Combate de Angamos",
+    "name": "Battle of Angamos",
+    "countryCode": "PE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Combate de Angamos"
+  },
+  {
+    "date": "2026-11-01",
+    "localName": "Día de Todos los Santos",
+    "name": "All Saints Day",
+    "countryCode": "PE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Día de Todos los Santos"
+  },
+  {
+    "date": "2026-12-08",
+    "localName": "Inmaculada Concepción",
+    "name": "Immaculate Conception",
+    "countryCode": "PE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Inmaculada Concepción"
+  },
+  {
+    "date": "2026-12-25",
+    "localName": "Navidad",
+    "name": "Christmas Day",
+    "countryCode": "PE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Navidad"
+  }
+]
