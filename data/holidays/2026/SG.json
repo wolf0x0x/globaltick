@@ -39,7 +39,7 @@
     ]
   },
   {
-    "date": "2026-03-20",
+    "date": "2026-03-21",
     "localName": "Hari Raya Puasa",
     "name": "Hari Raya Puasa",
     "countryCode": "SG",
@@ -79,8 +79,21 @@
   },
   {
     "date": "2026-05-27",
-    "localName": "Hari Raya Haji (Tentative Date)",
-    "name": "Hari Raya Haji (Tentative Date)",
+    "localName": "Hari Raya Haji",
+    "name": "Hari Raya Haji",
+    "countryCode": "SG",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2026-06-01",
+    "localName": "Vesak Day",
+    "name": "Vesak Day",
     "countryCode": "SG",
     "fixed": false,
     "global": true,
