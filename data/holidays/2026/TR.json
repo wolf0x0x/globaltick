@@ -13,6 +13,45 @@
     ]
   },
   {
+    "date": "2026-03-20",
+    "localName": "Ramazan Bayramı 1. Gün",
+    "name": "Eid al-Fitr First Day",
+    "countryCode": "TR",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2026-03-21",
+    "localName": "Ramazan Bayramı 2. Gün",
+    "name": "Eid al-Fitr Second Day",
+    "countryCode": "TR",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2026-03-22",
+    "localName": "Ramazan Bayramı 3. Gün",
+    "name": "Eid al-Fitr Third Day",
+    "countryCode": "TR",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
     "date": "2026-04-23",
     "localName": "Ulusal Egemenlik ve Çocuk Bayramı",
     "name": "National Independence & Children's Day",
@@ -42,6 +81,58 @@
     "date": "2026-05-19",
     "localName": "Atatürk'ü Anma, Gençlik ve Spor Bayramı",
     "name": "Atatürk Commemoration & Youth Day",
+    "countryCode": "TR",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2026-05-27",
+    "localName": "Kurban Bayramı 1. Gün",
+    "name": "Eid al-Adha First Day",
+    "countryCode": "TR",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2026-05-28",
+    "localName": "Kurban Bayramı 2. Gün",
+    "name": "Eid al-Adha Second Day",
+    "countryCode": "TR",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2026-05-29",
+    "localName": "Kurban Bayramı 3. Gün",
+    "name": "Eid al-Adha Third Day",
+    "countryCode": "TR",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2026-05-30",
+    "localName": "Kurban Bayramı 4. Gün",
+    "name": "Eid al-Adha Fourth Day",
     "countryCode": "TR",
     "fixed": false,
     "global": true,
