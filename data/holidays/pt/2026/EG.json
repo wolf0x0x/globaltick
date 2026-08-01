@@ -14,7 +14,7 @@
     "displayName": "عيد الميلاد المجيد"
   },
   {
-    "date": "2026-01-25",
+    "date": "2026-01-29",
     "localName": "عيد الثورة 25 يناير",
     "name": "Revolution Day 2011 / National Police Day",
     "countryCode": "EG",
@@ -26,6 +26,20 @@
       "Public"
     ],
     "displayName": "عيد الثورة 25 يناير"
+  },
+  {
+    "date": "2026-04-13",
+    "localName": "Sham El-Nessim",
+    "name": "Easter Monday",
+    "countryCode": "EG",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Sham El-Nessim"
   },
   {
     "date": "2026-04-25",
@@ -42,7 +56,7 @@
     "displayName": "عيد تحرير سيناء"
   },
   {
-    "date": "2026-05-01",
+    "date": "2026-05-07",
     "localName": "عيد العمال",
     "name": "Labour Day",
     "countryCode": "EG",
@@ -54,6 +68,90 @@
       "Public"
     ],
     "displayName": "عيد العمال"
+  },
+  {
+    "date": "2026-05-27",
+    "localName": "Eid Al-Adha",
+    "name": "Eid Al-Adha",
+    "countryCode": "EG",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Eid Al-Adha"
+  },
+  {
+    "date": "2026-05-28",
+    "localName": "Eid Al-Adha",
+    "name": "Eid Al-Adha",
+    "countryCode": "EG",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Eid Al-Adha"
+  },
+  {
+    "date": "2026-05-29",
+    "localName": "Eid Al-Adha",
+    "name": "Eid Al-Adha",
+    "countryCode": "EG",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Eid Al-Adha"
+  },
+  {
+    "date": "2026-05-30",
+    "localName": "Eid Al-Adha",
+    "name": "Eid Al-Adha",
+    "countryCode": "EG",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Eid Al-Adha"
+  },
+  {
+    "date": "2026-05-31",
+    "localName": "Eid Al-Adha",
+    "name": "Eid Al-Adha",
+    "countryCode": "EG",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Eid Al-Adha"
+  },
+  {
+    "date": "2026-06-18",
+    "localName": "Islamic New Year",
+    "name": "Islamic New Year",
+    "countryCode": "EG",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Islamic New Year"
   },
   {
     "date": "2026-07-02",
@@ -82,6 +180,20 @@
       "Public"
     ],
     "displayName": "عيد ثورة 23 يوليو"
+  },
+  {
+    "date": "2026-08-26",
+    "localName": "Prophet Muhammad's Birthday",
+    "name": "Prophet Muhammad's Birthday",
+    "countryCode": "EG",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Prophet Muhammad's Birthday"
   },
   {
     "date": "2026-10-06",
