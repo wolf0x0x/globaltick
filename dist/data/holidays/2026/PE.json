@@ -15,19 +15,6 @@
   {
     "date": "2026-04-02",
     "localName": "Jueves Santo",
-    "name": "Holy Thursday",
-    "countryCode": "PE",
-    "fixed": false,
-    "global": true,
-    "counties": null,
-    "launchYear": null,
-    "types": [
-      "Public"
-    ]
-  },
-  {
-    "date": "2026-04-02",
-    "localName": "Jueves Santo",
     "name": "Maundy Thursday",
     "countryCode": "PE",
     "fixed": false,
@@ -67,7 +54,7 @@
   {
     "date": "2026-05-01",
     "localName": "Día del Trabajo",
-    "name": "International Workers' Day",
+    "name": "Labour Day",
     "countryCode": "PE",
     "fixed": false,
     "global": true,
@@ -81,6 +68,19 @@
     "date": "2026-06-29",
     "localName": "Día de San Pedro y San Pablo",
     "name": "Saint Peter and Saint Paul",
+    "countryCode": "PE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2026-07-23",
+    "localName": "Día de la Fuerza Aérea",
+    "name": "Air Force Day",
     "countryCode": "PE",
     "fixed": false,
     "global": true,
@@ -117,8 +117,21 @@
     ]
   },
   {
+    "date": "2026-08-06",
+    "localName": "Batalla de Junin",
+    "name": "Battle of Junin",
+    "countryCode": "PE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
     "date": "2026-08-30",
-    "localName": "Día de Santa Rosa de Lima",
+    "localName": "Santa Rosa de Lima",
     "name": "Santa Rosa de Lima",
     "countryCode": "PE",
     "fixed": false,
@@ -159,6 +172,19 @@
     "date": "2026-12-08",
     "localName": "Inmaculada Concepción",
     "name": "Immaculate Conception",
+    "countryCode": "PE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2026-12-09",
+    "localName": "Batalla de Ayacucho",
+    "name": "Battle of Ayacucho",
     "countryCode": "PE",
     "fixed": false,
     "global": true,
