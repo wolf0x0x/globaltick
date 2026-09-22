@@ -126,6 +126,20 @@
     "displayName": "Heritage Day"
   },
   {
+    "date": "2026-11-04",
+    "localName": "Election Day",
+    "name": "Election Day",
+    "countryCode": "ZA",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Election Day"
+  },
+  {
     "date": "2026-12-16",
     "localName": "Day of Reconciliation",
     "name": "Day of Reconciliation",
