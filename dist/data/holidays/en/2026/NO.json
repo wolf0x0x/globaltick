@@ -140,6 +140,20 @@
     "displayName": "Andre pinsedag"
   },
   {
+    "date": "2026-12-24",
+    "localName": "Julaften",
+    "name": "Christmas Eve",
+    "countryCode": "NO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Bank"
+    ],
+    "displayName": "Julaften"
+  },
+  {
     "date": "2026-12-25",
     "localName": "Første juledag",
     "name": "Christmas Day",
