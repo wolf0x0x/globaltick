@@ -112,6 +112,20 @@
     "displayName": "Eid Al Chabab"
   },
   {
+    "date": "2026-10-31",
+    "localName": "Aid Al Wahda",
+    "name": "Unity Day",
+    "countryCode": "MA",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ],
+    "displayName": "Aid Al Wahda"
+  },
+  {
     "date": "2026-11-06",
     "localName": "Eid Al Massira Al Khadra",
     "name": "Green March",
