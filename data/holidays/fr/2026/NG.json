@@ -65,7 +65,7 @@
     "counties": null,
     "launchYear": null,
     "types": [
-      "Public"
+      "School"
     ],
     "displayName": "Children's Day"
   },
@@ -107,7 +107,7 @@
     "counties": null,
     "launchYear": null,
     "types": [
-      "Public"
+      "Observance"
     ],
     "displayName": "National Youth Day"
   },
