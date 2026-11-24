@@ -40,7 +40,7 @@
   },
   {
     "date": "2026-05-01",
-    "localName": "Día del Trabajo",
+    "localName": "Día Nacional del Trabajo",
     "name": "Labour Day",
     "countryCode": "CL",
     "fixed": false,
@@ -107,7 +107,7 @@
   },
   {
     "date": "2026-07-16",
-    "localName": "Virgen del Carmen",
+    "localName": "Día de la Virgen del Carmen",
     "name": "Our Lady of Mount Carmel",
     "countryCode": "CL",
     "fixed": false,
@@ -132,8 +132,23 @@
     ]
   },
   {
+    "date": "2026-08-20",
+    "localName": "Nacimiento del Prócer de la Independencia",
+    "name": "Birth of Bernardo O'Higgins",
+    "countryCode": "CL",
+    "fixed": false,
+    "global": false,
+    "counties": [
+      "CL-NB"
+    ],
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
     "date": "2026-09-18",
-    "localName": "Fiestas Patrias",
+    "localName": "Independencia Nacional",
     "name": "National holiday",
     "countryCode": "CL",
     "fixed": false,
@@ -159,7 +174,7 @@
   },
   {
     "date": "2026-10-12",
-    "localName": "Día del Descubrimiento de Dos Mundos",
+    "localName": "Encuentro de Dos Mundos",
     "name": "Columbus Day",
     "countryCode": "CL",
     "fixed": false,
